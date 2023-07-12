@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapps-deployment
+  labels:
+    app: myapps
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapps
+  template:
+    metadata:
+      labels:
+        app: myapps
+    spec:
+      containers:
+      - name: docker
+        image: ramyairganti/dotnet-web:latest
+        ports:
+        - containerPort: 80
