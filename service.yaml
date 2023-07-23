@@ -10,4 +10,7 @@ spec:
       port: 80
       targetPort: 5000
   type: LoadBalancer
+<<<<<<< HEAD
 
+=======
+>>>>>>> 267003d2dd7197ddbe809bad99d1690de4b8e8ba
