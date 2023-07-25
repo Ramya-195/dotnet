@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: docker
   namespace: ramya123
   labels:
     app: myapps
@@ -16,6 +17,40 @@ spec:
     spec:
       containers:
       - name: docker
-        image: acrregistry195.azurecr.io/dotnet-web:latest
+        image: ramyairganti/dotnet-web:latest
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "300Mi"
+          requests:
+            cpu: "100m"
+            memory: "300Mi"
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: ENV_VARIABLE_1
+          valueFrom:
+            configMapKeyRef:
+              name: docker-configmap
+              key: ENV_VARIABLE_1
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: docker-secret
+              key: SECRET_KEY
