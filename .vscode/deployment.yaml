@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: docker
-        image: ramyairganti/dotnet-web:latest
+        image: ramyairganti/dockerimage:latest
         ports:
         - containerPort: 80
         resources:
