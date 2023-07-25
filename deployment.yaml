@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: docker
-        image: ramyairganti/dotnet-web:latest
+        image: acrregistry195.azurecr.io/dotnet-web:latest
         ports:
         - containerPort: 80
