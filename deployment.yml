@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker
+  name: dotnet
   namespace: ramya123
   labels:
     app: myapps
@@ -10,66 +10,42 @@ spec:
   selector:
     matchLabels:
       app: myapps
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: myapps
     spec:
-      nodeSelector:
-        ramya: agentname
-      affinity:
+      affinity:   # Correctly place nodeAffinity under spec.template.spec
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: ramya
-                    operator: In
-                    values:
-                      - agentname
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 50
-              preference:
-                matchExpressions:
-                  - key: disktype
-                    operator: In
-                    values:
-                      - ssd
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
       containers:
-      - name: docker
+      - name: dotnet
         image: ramyairganti/dotnet-web:latest
         ports:
-        - containerPort: 80
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "300Mi"
-          requests:
-            cpu: "100m"
-            memory: "300Mi"
-        livenessProbe:
-          exec:
-            command:
-            - ls
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          failureThreshold: 3
-          successThreshold: 1
+        - containerPort: 5000
         readinessProbe:
-          exec:
-            command:
-            - ls
-          initialDelaySeconds: 5
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 30
           periodSeconds: 10
-          failureThreshold: 3
-          successThreshold: 1
-        env:
-        - name: ENV_VARIABLE_1
-          valueFrom:
-            configMapKeyRef:
-              name: docker-configmap
-              key: ENV_VARIABLE_1
-        - name: SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: docker-secret
-              key: SECRET_KEY
+      imagePullSecrets:
+        - name: sha
