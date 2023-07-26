@@ -20,7 +20,7 @@ spec:
       labels:
         app: myapps
     spec:
-      affinity:   # Correctly place nodeAffinity under spec.template.spec
+      affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
