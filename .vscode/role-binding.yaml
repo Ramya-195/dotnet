@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rolebinding
+  namespace: ramya123
+subjects:
+- kind: ServiceAccount
+  name: my-role
+  namespace: ramya123
+roleRef:
+  kind: Role # or ClusterRole for a ClusterRole
+  name: roleone
+  apiGroup: rbac.authorization.k8s.io
