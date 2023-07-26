@@ -8,6 +8,6 @@ subjects:
   name: my-role
   namespace: ramya123
 roleRef:
-  kind: Role # or ClusterRole for a ClusterRole
+  kind: Role
   name: my-role
   apiGroup: rbac.authorization.k8s.io
