@@ -9,5 +9,5 @@ subjects:
   namespace: ramya123
 roleRef:
   kind: Role # or ClusterRole for a ClusterRole
-  name: roleone
+  name: my-role
   apiGroup: rbac.authorization.k8s.io
