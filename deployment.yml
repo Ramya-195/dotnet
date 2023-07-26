@@ -33,6 +33,11 @@ spec:
       containers:
       - name: dotnet
         image: ramyairganti/dotnet-web:latest
+       tolerations:
+       - key: 
+         operator: <operator>
+         value: <value>
+         effect: <effect>
         ports:
         - containerPort: 5000
         readinessProbe:
