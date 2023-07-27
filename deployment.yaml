@@ -21,7 +21,7 @@ spec:
         app: myapps
     spec:
       affinity:
-        podAffinity:
+        podAntiAffinity:  # Add Pod Anti-Affinity
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
@@ -31,7 +31,7 @@ spec:
                 - myapps
             topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+          preferredDuringSchedulingIgnoredDuringExecution:  # Modify existing Node Affinity
           - weight: 1
             preference:
               matchExpressions:
@@ -54,3 +54,12 @@ spec:
           httpGet:
             path: /healthz
             port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        imagePullSecrets:
+        - name: sha
+        tolerations:
+        - key: node-type
+          operator: Equal
+          value: special
+          effect: NoSchedule
