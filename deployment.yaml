@@ -56,3 +56,10 @@ spec:
             port: 5000
           initialDelaySeconds: 30
           periodSeconds: 10
+      imagePullSecrets:
+        - name: sha
+      tolerations:
+        - key: node-type
+          operator: Equal
+          value: special
+          effect: NoSchedule
