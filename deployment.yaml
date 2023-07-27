@@ -42,11 +42,6 @@ spec:
       containers:
       - name: dotnet
         image: ramyairganti/dockerimage:latest
-        tolerations:
-        - key: "node-type"
-          operator: "Equal"
-          value: "special"
-          effect: "NoSchedule"
         ports:
         - containerPort: 5000
         readinessProbe:
@@ -59,7 +54,3 @@ spec:
           httpGet:
             path: /healthz
             port: 5000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-      imagePullSecrets:
-        - name: sha
