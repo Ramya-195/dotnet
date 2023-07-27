@@ -41,7 +41,7 @@ spec:
                 - ssd
       containers:
       - name: dotnet
-        image: nikitha2109/nikithaimage
+        image: ramyairganti/dockerimage:latest
         tolerations:
         - key: 
           operator: <operator>
