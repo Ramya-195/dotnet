@@ -21,7 +21,7 @@ spec:
         app: myapps
     spec:
       affinity:
-        podAntiAffinity:  # Add Pod Anti-Affinity
+        podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
@@ -31,7 +31,7 @@ spec:
                 - myapps
             topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:  # Modify existing Node Affinity
+          preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
             preference:
               matchExpressions:
