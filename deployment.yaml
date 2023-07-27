@@ -43,10 +43,10 @@ spec:
       - name: dotnet
         image: ramyairganti/dockerimage:latest
         tolerations:
-        - key: 
-          operator: <operator>
-          value: <value>
-          effect: <effect>
+        - key: "node-type"
+          operator: "Equal"
+          value: "special"
+          effect: "NoSchedule"
         ports:
         - containerPort: 5000
         readinessProbe:
