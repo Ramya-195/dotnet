@@ -39,7 +39,7 @@ spec:
                 operator: In
                 values:
                 - ssd
-      containers:
+    containers:
       - name: dotnet
         image: ramyairganti/dockerimage:latest
         ports:
