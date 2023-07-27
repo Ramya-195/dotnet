@@ -21,8 +21,17 @@ spec:
         app: myapps
     spec:
       affinity:
+        podAffinity:  # Add PodAffinity
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - myapps
+            topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+          preferredDuringSchedulingIgnoredDuringExecution:  # Modify existing NodeAffinity
           - weight: 1
             preference:
               matchExpressions:
@@ -33,11 +42,11 @@ spec:
       containers:
       - name: dotnet
         image: ramyairganti/dotnet-web:latest
-       tolerations:
-       - key: 
-         operator: <operator>
-         value: <value>
-         effect: <effect>
+        tolerations:
+        - key: 
+          operator: <operator>
+          value: <value>
+          effect: <effect>
         ports:
         - containerPort: 5000
         readinessProbe:
