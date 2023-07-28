@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: ramya 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ramya
+  template:
+    metadata:
+      labels:
+        app: ramya 
+    spec:
+      containers:
+        - name: ramya 
+          image: acrregistry195.azurecr.io/ramya
+          ports:
+          - containerPort: 5000
