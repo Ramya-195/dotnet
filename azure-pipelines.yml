@@ -28,14 +28,6 @@ stages:
               inputs:
                 action: createSecret
                 secretName: $(imagePullSecret)
-- task: KubernetesManifest@1
-  inputs:
-    action: 'deploy'
-    connectionType: 'kubernetesServiceConnection'
-    kubernetesServiceConnection: 'ckskluster-mahesh'
-    namespace: 'mahesh'
-    strategy: 'canary'
-    percentage: '0'
                 dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
 # ... Rest of the YAML content ...
